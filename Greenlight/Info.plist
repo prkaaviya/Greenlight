@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>MGLMapboxAccessToken</key>
+	<string>sk.eyJ1IjoicHJrYWF2aXlhMTciLCJhIjoiY20yZGJsdnN6MWJscjJqcjJuODhmMnh5aSJ9.X3uB3AGZqieEhU9z73caPg</string>
+	<key>NSFileAccessUsageDescription</key>
+	<string>Greenlight requires access to your device's file system to store and retrieve location and map data, as well as upload data to Firebase</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Soulmeh.otf</string>
+		<string>MonofontoRegular.otf</string>
+	</array>
+</dict>
+</plist>

@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Greenlight
 //
-//  Created by Kaaviya Ramkumar on 17/10/24.
+//  Created by Kaaviya Ramkumar on 15/10/24.
 //
 
 import SwiftUI
@@ -10,15 +10,12 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            LoadingView()
         }
-        .padding()
+        .background(Color("TextColor").edgesIgnoringSafeArea(.all))
     }
 }
-
+    
 #Preview {
     ContentView()
 }

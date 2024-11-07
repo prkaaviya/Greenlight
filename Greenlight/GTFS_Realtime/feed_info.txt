@@ -1,0 +1,2 @@
+feed_publisher_name,feed_publisher_url,feed_lang,feed_start_date,feed_end_date,feed_version
+National Transport Authority,https://www.nationaltransport.ie/,en,20241106,20251106,368C0F24-3F12-40CA-8410-EDB458268D8A

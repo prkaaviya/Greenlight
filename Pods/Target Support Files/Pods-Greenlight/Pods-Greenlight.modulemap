@@ -1,0 +1,6 @@
+framework module Pods_Greenlight {
+  umbrella header "Pods-Greenlight-umbrella.h"
+
+  export *
+  module * { export * }
+}
