@@ -19,6 +19,8 @@
 		ED3DA1D52CC158080099D719 /* Pods_Greenlight.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68C54F1DCD2B0D5E2C1F3EEA /* Pods_Greenlight.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED80A3452CC167CC00072AEE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80A3442CC167CC00072AEE /* MapView.swift */; };
 		ED80A3472CC17ED700072AEE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80A3462CC17ED700072AEE /* LocationManager.swift */; };
+		EDDE0C832CDD447200D8415F /* BusLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE0C822CDD446800D8415F /* BusLocationManager.swift */; };
+		EDE980142CDE83EF002099F8 /* BusListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE980132CDE83EF002099F8 /* BusListView.swift */; };
 		EDEAD0FA2CDCD23E0036B992 /* AddFavoriteRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAD0F92CDCD23E0036B992 /* AddFavoriteRouteView.swift */; };
 		EDEAD0FF2CDCDBC40036B992 /* RouteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAD0FE2CDCDBBD0036B992 /* RouteService.swift */; };
 		EDFECDF22CDCF098001A6CEC /* calendar_dates.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDEA2CDCF098001A6CEC /* calendar_dates.txt */; };
@@ -83,6 +85,8 @@
 		ED3DA1C62CC154DF0099D719 /* Soulmeh.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Soulmeh.otf; sourceTree = "<group>"; };
 		ED80A3442CC167CC00072AEE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		ED80A3462CC17ED700072AEE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		EDDE0C822CDD446800D8415F /* BusLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationManager.swift; sourceTree = "<group>"; };
+		EDE980132CDE83EF002099F8 /* BusListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusListView.swift; sourceTree = "<group>"; };
 		EDEAD0F92CDCD23E0036B992 /* AddFavoriteRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoriteRouteView.swift; sourceTree = "<group>"; };
 		EDEAD0FE2CDCDBBD0036B992 /* RouteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteService.swift; sourceTree = "<group>"; };
 		EDFECDE82CDCF098001A6CEC /* agency.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = agency.txt; sourceTree = "<group>"; };
@@ -171,12 +175,14 @@
 				ED3DA1BC2CC154DF0099D719 /* GoogleService-Info.plist */,
 				ED3DA1BF2CC154DF0099D719 /* GreenlightApp.swift */,
 				ED3DA1B82CC154DF0099D719 /* ContentView.swift */,
+				EDDE0C822CDD446800D8415F /* BusLocationManager.swift */,
 				ED3DA1C12CC154DF0099D719 /* LoadingView.swift */,
 				ED3DA1BD2CC154DF0099D719 /* GPSView.swift */,
 				ED80A3442CC167CC00072AEE /* MapView.swift */,
 				ED80A3462CC17ED700072AEE /* LocationManager.swift */,
 				EDEAD0F92CDCD23E0036B992 /* AddFavoriteRouteView.swift */,
 				EDEAD0FE2CDCDBBD0036B992 /* RouteService.swift */,
+				EDE980132CDE83EF002099F8 /* BusListView.swift */,
 				EDFECDFB2CDD044D001A6CEC /* RoutePreference.swift */,
 				ED3DA1BE2CC154DF0099D719 /* Greenlight.entitlements */,
 				ED3DA1C32CC154DF0099D719 /* MonofontoRegular.otf */,
@@ -416,7 +422,9 @@
 				ED80A3472CC17ED700072AEE /* LocationManager.swift in Sources */,
 				EDEAD0FA2CDCD23E0036B992 /* AddFavoriteRouteView.swift in Sources */,
 				EDFECDFC2CDD0453001A6CEC /* RoutePreference.swift in Sources */,
+				EDDE0C832CDD447200D8415F /* BusLocationManager.swift in Sources */,
 				ED3DA1D12CC154DF0099D719 /* GreenlightApp.swift in Sources */,
+				EDE980142CDE83EF002099F8 /* BusListView.swift in Sources */,
 				EDEAD0FF2CDCDBC40036B992 /* RouteService.swift in Sources */,
 				ED3DA1D22CC154DF0099D719 /* GPSView.swift in Sources */,
 				ED3DA1D32CC154DF0099D719 /* ContentView.swift in Sources */,
