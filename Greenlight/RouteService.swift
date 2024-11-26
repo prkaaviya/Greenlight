@@ -72,6 +72,8 @@ class RouteService {
             }
 
             do {
+                print("DEBUG - Raw data: \(String(data: data, encoding: .utf8) ?? "No data")")
+
                 if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                    let entities = jsonObject["entity"] as? [[String: Any]] {
                     
