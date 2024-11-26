@@ -46,7 +46,7 @@ class BusLocationManager: ObservableObject {
 
     func startUpdatingBusLocations(for routeId: String, userLocation: CLLocation) {
         stopUpdatingBusLocations()
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
             self?.fetchBusLocations(for: routeId, userLocation: userLocation)
         }
     }
