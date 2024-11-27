@@ -23,6 +23,7 @@
 		EDE980142CDE83EF002099F8 /* BusListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE980132CDE83EF002099F8 /* BusListView.swift */; };
 		EDEAD0FA2CDCD23E0036B992 /* AddFavoriteRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAD0F92CDCD23E0036B992 /* AddFavoriteRouteView.swift */; };
 		EDEAD0FF2CDCDBC40036B992 /* RouteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAD0FE2CDCDBBD0036B992 /* RouteService.swift */; };
+		EDEC25CA2CF6A5E700554C56 /* RealTimeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC25C92CF6A5E100554C56 /* RealTimeMapView.swift */; };
 		EDFECDF22CDCF098001A6CEC /* calendar_dates.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDEA2CDCF098001A6CEC /* calendar_dates.txt */; };
 		EDFECDF32CDCF098001A6CEC /* routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDEC2CDCF098001A6CEC /* routes.txt */; };
 		EDFECDF42CDCF098001A6CEC /* agency.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDE82CDCF098001A6CEC /* agency.txt */; };
@@ -89,6 +90,7 @@
 		EDE980132CDE83EF002099F8 /* BusListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusListView.swift; sourceTree = "<group>"; };
 		EDEAD0F92CDCD23E0036B992 /* AddFavoriteRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoriteRouteView.swift; sourceTree = "<group>"; };
 		EDEAD0FE2CDCDBBD0036B992 /* RouteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteService.swift; sourceTree = "<group>"; };
+		EDEC25C92CF6A5E100554C56 /* RealTimeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeMapView.swift; sourceTree = "<group>"; };
 		EDFECDE82CDCF098001A6CEC /* agency.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = agency.txt; sourceTree = "<group>"; };
 		EDFECDE92CDCF098001A6CEC /* calendar.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = calendar.txt; sourceTree = "<group>"; };
 		EDFECDEA2CDCF098001A6CEC /* calendar_dates.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = calendar_dates.txt; sourceTree = "<group>"; };
@@ -175,15 +177,16 @@
 				ED3DA1BC2CC154DF0099D719 /* GoogleService-Info.plist */,
 				ED3DA1BF2CC154DF0099D719 /* GreenlightApp.swift */,
 				ED3DA1B82CC154DF0099D719 /* ContentView.swift */,
-				EDDE0C822CDD446800D8415F /* BusLocationManager.swift */,
 				ED3DA1C12CC154DF0099D719 /* LoadingView.swift */,
 				ED3DA1BD2CC154DF0099D719 /* GPSView.swift */,
 				ED80A3442CC167CC00072AEE /* MapView.swift */,
-				ED80A3462CC17ED700072AEE /* LocationManager.swift */,
+				EDE980132CDE83EF002099F8 /* BusListView.swift */,
+				EDEC25C92CF6A5E100554C56 /* RealTimeMapView.swift */,
 				EDEAD0F92CDCD23E0036B992 /* AddFavoriteRouteView.swift */,
 				EDEAD0FE2CDCDBBD0036B992 /* RouteService.swift */,
-				EDE980132CDE83EF002099F8 /* BusListView.swift */,
 				EDFECDFB2CDD044D001A6CEC /* RoutePreference.swift */,
+				ED80A3462CC17ED700072AEE /* LocationManager.swift */,
+				EDDE0C822CDD446800D8415F /* BusLocationManager.swift */,
 				ED3DA1BE2CC154DF0099D719 /* Greenlight.entitlements */,
 				ED3DA1C32CC154DF0099D719 /* MonofontoRegular.otf */,
 				ED3DA1C62CC154DF0099D719 /* Soulmeh.otf */,
@@ -417,6 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDEC25CA2CF6A5E700554C56 /* RealTimeMapView.swift in Sources */,
 				ED3DA1CF2CC154DF0099D719 /* LoadingView.swift in Sources */,
 				ED80A3452CC167CC00072AEE /* MapView.swift in Sources */,
 				ED80A3472CC17ED700072AEE /* LocationManager.swift in Sources */,

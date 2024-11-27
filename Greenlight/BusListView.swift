@@ -13,7 +13,7 @@ struct BusListView: View {
     let userLocation: CLLocation  // Accepts user location
     let favoriteRoute: String
     let favoriteRouteName: String // Favorite route name for display
-
+    @State private var isMapViewActive = false  // State to control navigation to map view
     
     var body: some View {
         VStack {
@@ -56,6 +56,31 @@ struct BusListView: View {
                             }
                             .padding(.bottom, 10)
                             
+            }
+            
+            // "Show on Map" button
+            Button(action: {
+                isMapViewActive = true
+            }) {
+                Text("Show on Map")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+            }
+            .padding()
+            
+            // Navigation link to the Map View
+            NavigationLink(
+                destination: RealTimeMapView(
+                    busLocations: busLocationManager.busLocations,
+                    userLocation: userLocation
+                ),
+                isActive: $isMapViewActive
+            ) {
+                EmptyView()
             }
         }
         .onAppear {

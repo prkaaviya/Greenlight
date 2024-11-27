@@ -24,20 +24,18 @@ class RouteService {
         loadStopTimesData()
     }
 
-    
     private func loadTripsData() {
         guard let filePath = Bundle.main.path(forResource: "trips", ofType: "txt") else {
             print("trips.txt file not found.")
             return
         }
-        
+
         do {
             let content = try String(contentsOfFile: filePath)
             let lines = content.components(separatedBy: .newlines)
             
-            for line in lines.dropFirst() {  // Skip the header line
+            for line in lines.dropFirst() {
                 let fields = line.split(separator: ",", omittingEmptySubsequences: false)
-                
                 if fields.count >= 3 {
                     let tripId = fields[2].trimmingCharacters(in: .whitespacesAndNewlines)
                     let routeId = fields[0].trimmingCharacters(in: .whitespacesAndNewlines)
@@ -57,14 +55,13 @@ class RouteService {
             print("stop_times.txt file not found.")
             return
         }
-        
+
         do {
             let content = try String(contentsOfFile: filePath)
             let lines = content.components(separatedBy: .newlines)
             
-            for line in lines.dropFirst() {  // Skip the header line
+            for line in lines.dropFirst() {
                 let fields = line.split(separator: ",", omittingEmptySubsequences: false)
-                
                 if fields.count >= 4 {
                     let tripId = fields[0].trimmingCharacters(in: .whitespacesAndNewlines)
                     let stopId = fields[3].trimmingCharacters(in: .whitespacesAndNewlines)
@@ -82,21 +79,19 @@ class RouteService {
             print("Error reading stop_times.txt file: \(error)")
         }
     }
-    
-    // Load stops.txt to get stop data including latitude and longitude
+
     private func loadStopData() {
         guard let filePath = Bundle.main.path(forResource: "stops", ofType: "txt") else {
             print("stops.txt file not found.")
             return
         }
-        
+
         do {
             let content = try String(contentsOfFile: filePath)
             let lines = content.components(separatedBy: .newlines)
             
-            for line in lines.dropFirst() {  // Skip the header line
+            for line in lines.dropFirst() {
                 let fields = line.split(separator: ",", omittingEmptySubsequences: false)
-                
                 if fields.count >= 5 {
                     let stopId = fields[0].trimmingCharacters(in: .whitespacesAndNewlines)
                     let stopName = fields[2].trimmingCharacters(in: .whitespacesAndNewlines)
@@ -111,9 +106,6 @@ class RouteService {
             print("DEBUG: Loaded \(stopData.count) stops with coordinates.")
         } catch {
             print("Error reading stops.txt file: \(error)")
-        }
-        if stopData.isEmpty {
-            print("DEBUG: Warning - stopData is empty. Ensure stops.txt is correctly formatted and loaded.")
         }
     }
     

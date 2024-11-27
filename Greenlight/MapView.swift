@@ -33,52 +33,55 @@ struct MapboxUIView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MapView, context: Context) {
+        // Update camera position
         let cameraOptions = CameraOptions(center: coordinate, zoom: 14.0)
         uiView.mapboxMap.setCamera(to: cameraOptions)
-    }
-    
-    private func updateBusAnnotations(mapView: MapView) {
-        print("DEBUG in func updateBusAnnotations")
-        // Ensure the annotation manager is available
-        guard let manager = annotationManager else { return }
         
-        // Clear existing annotations
-        manager.annotations = []
+        do {
 
-        // Check if the custom image is already in the style, and add it if not
-        if let image = UIImage(named: "bus_stop.png") {
-            do {
-                if !mapView.mapboxMap.style.imageExists(withId: "bus_stop_image") {
-                    try mapView.mapboxMap.style.addImage(image, id: "bus_stop_image")
-                }
-            } catch {
-                print("Failed to add bus stop image to style: \(error)")
+            // Add custom icon for bus stops
+            if let busIcon = UIImage(named: "BusIcon")?.resize(to: CGSize(width: 30, height: 30)) {
+                try uiView.mapboxMap.style.addImage(busIcon, id: "BusIcon")
             }
+        } catch {
+            print("Error adding style images: \(error.localizedDescription)")
         }
-        
-        // Create new annotations based on bus locations
-        let annotations = busLocations.map { location -> PointAnnotation in
-            var lat : Double = 53.36001449
-            var long : Double = -6.262791289
-            var annotation = PointAnnotation(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long))
-            lat = lat + 0.5
-            long = long + 0.5
+
+        // Create or use an existing PointAnnotationManager for annotations
+        let annotationManager = uiView.annotations.makePointAnnotationManager()
+
+        // Clear existing annotations
+        annotationManager.annotations = []
+
+        // Add user location annotation
+        var userLocationAnnotation = PointAnnotation(coordinate: coordinate)
+        userLocationAnnotation.textField = "You are here."
+        userLocationAnnotation.textOffset = [0, 2]
+        userLocationAnnotation.textColor = StyleColor(.black)
+        userLocationAnnotation.iconImage = "PrimaryAccentColor"
+        annotationManager.annotations.append(userLocationAnnotation)
+
+        // Add bus stop annotations with direction-based color coding
+        let busStopAnnotations = busLocations.map { location -> PointAnnotation in
+            var annotation = PointAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+            annotation.textField = "\(location.stopName) (\(location.directionId ?? -1))"
             
-            // Set the annotation image
-            annotation.iconImage = "bus_stop_image"
+            let directionColor: UIColor = location.directionId == 0 ? .red : .green
+            annotation.textColor = StyleColor(directionColor)
+            annotation.textOffset = [0, 2]
+            annotation.iconImage = "BusIcon"
             return annotation
         }
-        
-        // Update the annotation manager with the new annotations
-        manager.annotations = annotations
+        annotationManager.annotations.append(contentsOf: busStopAnnotations)
     }
-    
-    // Observe changes to `busLocations` and trigger annotation update
-    func updateAnnotationsIfNeeded() -> some View {
-        self.onChange(of: busLocations) { _ in
-            if let mapView = UIApplication.shared.windows.first?.rootViewController?.view.subviews.compactMap({ $0 as? MapView }).first {
-                updateBusAnnotations(mapView: mapView)
-            }
-        }
+
+}
+
+extension UIImage {
+    func resize(to size: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        defer { UIGraphicsEndImageContext() }
+        self.draw(in: CGRect(origin: .zero, size: size))
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
