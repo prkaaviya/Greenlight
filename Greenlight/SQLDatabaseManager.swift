@@ -7,8 +7,8 @@
 
 import SQLite
 
-class DatabaseManager {
-    static let shared = DatabaseManager() // Singleton instance
+class SQLDatabaseManager {
+    static let shared = SQLDatabaseManager() // Singleton instance
 
     private var db: Connection!
 
@@ -25,6 +25,15 @@ class DatabaseManager {
             print("ERROR: Failed to connect to database: \(error)")
         }
     }
+    
+    // Provide access to the database connection
+        func getDatabaseConnection() -> Connection? {
+            guard let db = db else {
+                print("ERROR: Database connection is nil.")
+                return nil
+            }
+            return db
+        }
 
     // Fetch stops by stop ID
     func getStop(by stopId: String) -> (name: String, latitude: Double, longitude: Double)? {
@@ -88,5 +97,32 @@ class DatabaseManager {
         }
 
         return stopTimes
+    }
+    
+    func getAllRoutes() -> [String] {
+        var routes: [String] = []
+        let routesTable = Table("routes")
+        let routeShortName = Expression<String>("route_short_name")
+
+        do {
+            for route in try db.prepare(routesTable.select(routeShortName)) {
+                routes.append(route[routeShortName])
+            }
+        } catch {
+            print("ERROR: Failed to fetch routes: \(error)")
+        }
+
+        return routes
+    }
+    
+    func getLastStopName(for routeId: String, directionId: Int) -> String {
+        let trips = getTrips(by: routeId).filter { $0.directionId == directionId }
+        for trip in trips {
+            if let stops = getStopTimes(by: trip.tripId).last, // Fetch last stop directly
+               let stopDetails = getStop(by: stops.stopId) {
+                return stopDetails.name
+            }
+        }
+        return "Unknown"
     }
 }

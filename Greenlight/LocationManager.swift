@@ -15,6 +15,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userAddress: String?
     @Published var locationError: String?
 
+    var currentLocation: CLLocation? {
+        guard let coordinate = userLocation else { return nil }
+        return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    }
+
     override init() {
         super.init()
         locationManager.delegate = self

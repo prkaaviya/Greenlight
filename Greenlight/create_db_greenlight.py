@@ -6,6 +6,7 @@ GTFS_DIR = "GTFS_Realtime"
 stops_file = GTFS_DIR + "/stops.txt"
 trips_file = GTFS_DIR + "/trips.txt"
 stop_times_file = GTFS_DIR + "/stop_times.txt"
+routes_file = GTFS_DIR + "/routes.txt"
 
 # SQLite database file
 database_file = "static_data.db"
@@ -41,6 +42,12 @@ CREATE TABLE IF NOT EXISTS stop_times (
     FOREIGN KEY (stop_id) REFERENCES stops(stop_id)
 )
 """)
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS routes (
+    route_id TEXT PRIMARY KEY,
+    route_short_name TEXT
+)
+""")
 
 # Insert stops
 with open(stops_file, "r") as file:
@@ -74,6 +81,17 @@ with open(stop_times_file, "r") as file:
             INSERT INTO stop_times (trip_id, arrival_time, departure_time, stop_id, stop_sequence)
             VALUES (?, ?, ?, ?, ?)
             """, (row[0], row[1], row[2], row[3], int(row[4])))
+
+# Insert routes
+with open(routes_file, "r") as file:
+    reader = csv.reader(file)
+    next(reader)  # Skip header
+    for row in reader:
+        if len(row) >= 3:
+            cursor.execute("""
+            INSERT OR IGNORE INTO routes (route_id, route_short_name)
+            VALUES (?, ?)
+            """, (row[0], row[2]))
 
 # Commit and close connection
 conn.commit()
