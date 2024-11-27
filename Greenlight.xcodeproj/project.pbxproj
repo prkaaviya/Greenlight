@@ -13,17 +13,15 @@
 		ED3DA1CA2CC154DF0099D719 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED3DA1B72CC154DF0099D719 /* Assets.xcassets */; };
 		ED3DA1CF2CC154DF0099D719 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3DA1C12CC154DF0099D719 /* LoadingView.swift */; };
 		ED3DA1D12CC154DF0099D719 /* GreenlightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3DA1BF2CC154DF0099D719 /* GreenlightApp.swift */; };
-		ED3DA1D22CC154DF0099D719 /* GPSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3DA1BD2CC154DF0099D719 /* GPSView.swift */; };
-		ED3DA1D32CC154DF0099D719 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3DA1B82CC154DF0099D719 /* ContentView.swift */; };
 		ED3DA1D42CC158080099D719 /* Pods_Greenlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C54F1DCD2B0D5E2C1F3EEA /* Pods_Greenlight.framework */; };
 		ED3DA1D52CC158080099D719 /* Pods_Greenlight.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68C54F1DCD2B0D5E2C1F3EEA /* Pods_Greenlight.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED80A3452CC167CC00072AEE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80A3442CC167CC00072AEE /* MapView.swift */; };
-		ED80A3472CC17ED700072AEE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80A3462CC17ED700072AEE /* LocationManager.swift */; };
-		EDDE0C832CDD447200D8415F /* BusLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE0C822CDD446800D8415F /* BusLocationManager.swift */; };
-		EDE980142CDE83EF002099F8 /* BusListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE980132CDE83EF002099F8 /* BusListView.swift */; };
-		EDEAD0FA2CDCD23E0036B992 /* AddFavoriteRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAD0F92CDCD23E0036B992 /* AddFavoriteRouteView.swift */; };
-		EDEAD0FF2CDCDBC40036B992 /* RouteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEAD0FE2CDCDBBD0036B992 /* RouteService.swift */; };
-		EDEC25CA2CF6A5E700554C56 /* RealTimeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC25C92CF6A5E100554C56 /* RealTimeMapView.swift */; };
+		ED7CCAF42CF77F760035DFE0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CCAF32CF77F730035DFE0 /* MainView.swift */; };
+		ED7CCAF62CF7811A0035DFE0 /* ChooseRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CCAF52CF781150035DFE0 /* ChooseRouteView.swift */; };
+		ED7CCAF82CF7815A0035DFE0 /* RealTimeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CCAF72CF7814D0035DFE0 /* RealTimeMapView.swift */; };
+		ED7CCAFA2CF783600035DFE0 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CCAF92CF7835C0035DFE0 /* SignUpView.swift */; };
+		ED7CCAFC2CF783A30035DFE0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CCAFB2CF7839F0035DFE0 /* LoginView.swift */; };
+		ED80F5A02CF795F100B8C0C8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80F59F2CF795ED00B8C0C8 /* AuthManager.swift */; };
+		ED80F5A22CF7965F00B8C0C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80F5A12CF7965B00B8C0C8 /* ContentView.swift */; };
 		EDFECDF22CDCF098001A6CEC /* calendar_dates.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDEA2CDCF098001A6CEC /* calendar_dates.txt */; };
 		EDFECDF32CDCF098001A6CEC /* routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDEC2CDCF098001A6CEC /* routes.txt */; };
 		EDFECDF42CDCF098001A6CEC /* agency.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDE82CDCF098001A6CEC /* agency.txt */; };
@@ -33,7 +31,6 @@
 		EDFECDF82CDCF098001A6CEC /* trips.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDF02CDCF098001A6CEC /* trips.txt */; };
 		EDFECDF92CDCF098001A6CEC /* feed_info.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDEB2CDCF098001A6CEC /* feed_info.txt */; };
 		EDFECDFA2CDCF098001A6CEC /* stop_times.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDEE2CDCF098001A6CEC /* stop_times.txt */; };
-		EDFECDFC2CDD0453001A6CEC /* RoutePreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFECDFB2CDD044D001A6CEC /* RoutePreference.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,22 +72,20 @@
 		ED24F1922CC1521B00A8F6C4 /* GreenlightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreenlightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED24F19C2CC1521B00A8F6C4 /* GreenlightUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreenlightUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED3DA1B72CC154DF0099D719 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		ED3DA1B82CC154DF0099D719 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		ED3DA1BC2CC154DF0099D719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		ED3DA1BD2CC154DF0099D719 /* GPSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSView.swift; sourceTree = "<group>"; };
 		ED3DA1BE2CC154DF0099D719 /* Greenlight.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Greenlight.entitlements; sourceTree = "<group>"; };
 		ED3DA1BF2CC154DF0099D719 /* GreenlightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenlightApp.swift; sourceTree = "<group>"; };
 		ED3DA1C12CC154DF0099D719 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		ED3DA1C32CC154DF0099D719 /* MonofontoRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MonofontoRegular.otf; sourceTree = "<group>"; };
 		ED3DA1C42CC154DF0099D719 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ED3DA1C62CC154DF0099D719 /* Soulmeh.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Soulmeh.otf; sourceTree = "<group>"; };
-		ED80A3442CC167CC00072AEE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		ED80A3462CC17ED700072AEE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		EDDE0C822CDD446800D8415F /* BusLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationManager.swift; sourceTree = "<group>"; };
-		EDE980132CDE83EF002099F8 /* BusListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusListView.swift; sourceTree = "<group>"; };
-		EDEAD0F92CDCD23E0036B992 /* AddFavoriteRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoriteRouteView.swift; sourceTree = "<group>"; };
-		EDEAD0FE2CDCDBBD0036B992 /* RouteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteService.swift; sourceTree = "<group>"; };
-		EDEC25C92CF6A5E100554C56 /* RealTimeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeMapView.swift; sourceTree = "<group>"; };
+		ED7CCAF32CF77F730035DFE0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		ED7CCAF52CF781150035DFE0 /* ChooseRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRouteView.swift; sourceTree = "<group>"; };
+		ED7CCAF72CF7814D0035DFE0 /* RealTimeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeMapView.swift; sourceTree = "<group>"; };
+		ED7CCAF92CF7835C0035DFE0 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		ED7CCAFB2CF7839F0035DFE0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		ED80F59F2CF795ED00B8C0C8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		ED80F5A12CF7965B00B8C0C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EDFECDE82CDCF098001A6CEC /* agency.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = agency.txt; sourceTree = "<group>"; };
 		EDFECDE92CDCF098001A6CEC /* calendar.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = calendar.txt; sourceTree = "<group>"; };
 		EDFECDEA2CDCF098001A6CEC /* calendar_dates.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = calendar_dates.txt; sourceTree = "<group>"; };
@@ -100,7 +95,6 @@
 		EDFECDEE2CDCF098001A6CEC /* stop_times.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = stop_times.txt; sourceTree = "<group>"; };
 		EDFECDEF2CDCF098001A6CEC /* stops.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
 		EDFECDF02CDCF098001A6CEC /* trips.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = trips.txt; sourceTree = "<group>"; };
-		EDFECDFB2CDD044D001A6CEC /* RoutePreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutePreference.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,17 +170,14 @@
 				ED3DA1B72CC154DF0099D719 /* Assets.xcassets */,
 				ED3DA1BC2CC154DF0099D719 /* GoogleService-Info.plist */,
 				ED3DA1BF2CC154DF0099D719 /* GreenlightApp.swift */,
-				ED3DA1B82CC154DF0099D719 /* ContentView.swift */,
+				ED80F5A12CF7965B00B8C0C8 /* ContentView.swift */,
 				ED3DA1C12CC154DF0099D719 /* LoadingView.swift */,
-				ED3DA1BD2CC154DF0099D719 /* GPSView.swift */,
-				ED80A3442CC167CC00072AEE /* MapView.swift */,
-				EDE980132CDE83EF002099F8 /* BusListView.swift */,
-				EDEC25C92CF6A5E100554C56 /* RealTimeMapView.swift */,
-				EDEAD0F92CDCD23E0036B992 /* AddFavoriteRouteView.swift */,
-				EDEAD0FE2CDCDBBD0036B992 /* RouteService.swift */,
-				EDFECDFB2CDD044D001A6CEC /* RoutePreference.swift */,
-				ED80A3462CC17ED700072AEE /* LocationManager.swift */,
-				EDDE0C822CDD446800D8415F /* BusLocationManager.swift */,
+				ED7CCAFB2CF7839F0035DFE0 /* LoginView.swift */,
+				ED7CCAF92CF7835C0035DFE0 /* SignUpView.swift */,
+				ED7CCAF32CF77F730035DFE0 /* MainView.swift */,
+				ED7CCAF52CF781150035DFE0 /* ChooseRouteView.swift */,
+				ED7CCAF72CF7814D0035DFE0 /* RealTimeMapView.swift */,
+				ED80F59F2CF795ED00B8C0C8 /* AuthManager.swift */,
 				ED3DA1BE2CC154DF0099D719 /* Greenlight.entitlements */,
 				ED3DA1C32CC154DF0099D719 /* MonofontoRegular.otf */,
 				ED3DA1C62CC154DF0099D719 /* Soulmeh.otf */,
@@ -325,6 +316,9 @@
 			);
 			mainGroup = ED24F1782CC1521A00A8F6C4;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ED7CCB012CF785720035DFE0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = ED24F1822CC1521A00A8F6C4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -420,18 +414,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDEC25CA2CF6A5E700554C56 /* RealTimeMapView.swift in Sources */,
+				ED7CCAF82CF7815A0035DFE0 /* RealTimeMapView.swift in Sources */,
+				ED80F5A02CF795F100B8C0C8 /* AuthManager.swift in Sources */,
+				ED7CCAF62CF7811A0035DFE0 /* ChooseRouteView.swift in Sources */,
 				ED3DA1CF2CC154DF0099D719 /* LoadingView.swift in Sources */,
-				ED80A3452CC167CC00072AEE /* MapView.swift in Sources */,
-				ED80A3472CC17ED700072AEE /* LocationManager.swift in Sources */,
-				EDEAD0FA2CDCD23E0036B992 /* AddFavoriteRouteView.swift in Sources */,
-				EDFECDFC2CDD0453001A6CEC /* RoutePreference.swift in Sources */,
-				EDDE0C832CDD447200D8415F /* BusLocationManager.swift in Sources */,
+				ED7CCAFA2CF783600035DFE0 /* SignUpView.swift in Sources */,
+				ED80F5A22CF7965F00B8C0C8 /* ContentView.swift in Sources */,
+				ED7CCAF42CF77F760035DFE0 /* MainView.swift in Sources */,
 				ED3DA1D12CC154DF0099D719 /* GreenlightApp.swift in Sources */,
-				EDE980142CDE83EF002099F8 /* BusListView.swift in Sources */,
-				EDEAD0FF2CDCDBC40036B992 /* RouteService.swift in Sources */,
-				ED3DA1D22CC154DF0099D719 /* GPSView.swift in Sources */,
-				ED3DA1D32CC154DF0099D719 /* ContentView.swift in Sources */,
+				ED7CCAFC2CF783A30035DFE0 /* LoginView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,6 +799,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ED7CCB012CF785720035DFE0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = ED24F1792CC1521A00A8F6C4 /* Project object */;
 }

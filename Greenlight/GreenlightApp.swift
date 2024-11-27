@@ -7,19 +7,19 @@
 
 import SwiftUI
 import Firebase
-import MapboxMaps
 
 @main
 struct GreenlightApp: App {
-    
-    // Initialize Firebase when the app starts
+    @StateObject private var authManager = AuthManager()
+
     init() {
         FirebaseApp.configure()
     }
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(authManager)
         }
     }
 }

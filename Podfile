@@ -2,7 +2,7 @@ platform :ios, '15.6'
 
 target 'Greenlight' do
   use_frameworks!
-  pod 'MapboxMaps', '~> 10.18.2'
+  pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
 end
