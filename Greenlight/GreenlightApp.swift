@@ -11,6 +11,7 @@ import Firebase
 @main
 struct GreenlightApp: App {
     @StateObject private var authManager = AuthManager()
+    @StateObject private var locationManager = LocationManager()
 
     init() {
         FirebaseApp.configure()
@@ -20,6 +21,7 @@ struct GreenlightApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(authManager)
+                .environmentObject(locationManager)
         }
     }
 }

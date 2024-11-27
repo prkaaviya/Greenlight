@@ -10,6 +10,7 @@ import CoreLocation
 
 struct MainView: View {
     @EnvironmentObject var authManager: AuthManager
+    @EnvironmentObject var locationManager: LocationManager
     
     var body: some View {
         NavigationView {
@@ -28,31 +29,39 @@ struct MainView: View {
                     .foregroundColor(Color("PrimaryAccentColor"))
                     .cornerRadius(10)
                     
-                    if let name = authManager.userName {
-                        Text("Hello \(name)!")
-                            .font(.custom("MonofontoRegular", size: 18))
-                            .foregroundColor(Color("TextColor"))
-                            .padding(.bottom, 50)
-                    }
-                    
                     Spacer()
                     
-                    NavigationLink(destination: RealTimeMapView()) {
-                        Text("Show Real-Time Map")
-                            .font(.custom("MonofontoRegular", size: 16))
-                            .foregroundColor(Color("PrimaryAccentColor"))
-                            .padding(.vertical, 12)
-                            .frame(maxWidth: .infinity)
-                            .background(Color("TextColor"))
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)
+                    Text("Hello \(authManager.userName ?? "Guest")!")
+                        .font(.custom("MonofontoRegular", size: 18))
+                        .foregroundColor(Color("TextColor"))
+                        .multilineTextAlignment(.center) // Center-align text
+                        .padding(.bottom, 50)
+                                        
+                    if let address = locationManager.userAddress {
+                        Text("You are currently located at \(address).")
+                            .font(.custom("MonofontoRegular", size: 20))
+                            .foregroundColor(Color("TextColor"))
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 10)
+                    } else if let error = locationManager.locationError {
+                        Text("Location Error: \(error)")
+                            .font(.custom("MonofontoRegular", size: 20))
+                            .foregroundColor(.red)
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 10)
+                    } else {
+                        Text("Fetching your address...")
+                            .font(.custom("MonofontoRegular", size: 20))
+                            .foregroundColor(Color("TextColor"))
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 10)
                     }
-                    .padding(.horizontal, 25)
-                    .padding(.bottom, 50)
+
+                    Spacer()
                     
                     NavigationLink(destination: ChooseRouteView()) {
                         Text("Choose Bus Route")
-                            .font(.custom("MonofontoRegular", size: 16))
+                            .font(.custom("MonofontoRegular", size: 18))
                             .foregroundColor(Color("PrimaryAccentColor"))
                             .padding(.vertical, 12)
                             .frame(maxWidth: .infinity)
@@ -65,7 +74,7 @@ struct MainView: View {
                     
                     Button(action: logout) {
                         Text("Logout")
-                            .font(.custom("MonofontoRegular", size: 16))
+                            .font(.custom("MonofontoRegular", size: 18))
                             .foregroundColor(Color("PrimaryAccentColor"))
                             .padding(.vertical, 12)
                             .frame(maxWidth: .infinity)
@@ -82,6 +91,7 @@ struct MainView: View {
     
     func logout() {
         authManager.logout()
+        print("DEBUG: User logged out.") // Debugging Feedback
     }
 }
 

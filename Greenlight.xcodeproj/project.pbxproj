@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED115FB92CF7B55A0069AD78 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED115FB82CF7B5550069AD78 /* LocationManager.swift */; };
 		ED3DA1C72CC154DF0099D719 /* Soulmeh.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED3DA1C62CC154DF0099D719 /* Soulmeh.otf */; };
 		ED3DA1C82CC154DF0099D719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED3DA1BC2CC154DF0099D719 /* GoogleService-Info.plist */; };
 		ED3DA1C92CC154DF0099D719 /* MonofontoRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED3DA1C32CC154DF0099D719 /* MonofontoRegular.otf */; };
@@ -71,6 +72,7 @@
 		26DBDDA23C542CC60246E583 /* Pods-Greenlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Greenlight.debug.xcconfig"; path = "Target Support Files/Pods-Greenlight/Pods-Greenlight.debug.xcconfig"; sourceTree = "<group>"; };
 		68C54F1DCD2B0D5E2C1F3EEA /* Pods_Greenlight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Greenlight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E53B4935617C70E7FA656563 /* Pods-Greenlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Greenlight.release.xcconfig"; path = "Target Support Files/Pods-Greenlight/Pods-Greenlight.release.xcconfig"; sourceTree = "<group>"; };
+		ED115FB82CF7B5550069AD78 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		ED24F1812CC1521A00A8F6C4 /* Greenlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Greenlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED24F1922CC1521B00A8F6C4 /* GreenlightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreenlightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED24F19C2CC1521B00A8F6C4 /* GreenlightUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreenlightUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +186,7 @@
 				ED7CCAF52CF781150035DFE0 /* ChooseRouteView.swift */,
 				ED7CCAF72CF7814D0035DFE0 /* RealTimeMapView.swift */,
 				ED80F59F2CF795ED00B8C0C8 /* AuthManager.swift */,
+				ED115FB82CF7B5550069AD78 /* LocationManager.swift */,
 				ED80F5A92CF7B07200B8C0C8 /* SQLDatabaseManager.swift */,
 				ED3DA1BE2CC154DF0099D719 /* Greenlight.entitlements */,
 				ED80F5A72CF7ADDA00B8C0C8 /* create_db_greenlight.py */,
@@ -428,6 +431,7 @@
 				ED7CCAF82CF7815A0035DFE0 /* RealTimeMapView.swift in Sources */,
 				ED80F5A02CF795F100B8C0C8 /* AuthManager.swift in Sources */,
 				ED7CCAF62CF7811A0035DFE0 /* ChooseRouteView.swift in Sources */,
+				ED115FB92CF7B55A0069AD78 /* LocationManager.swift in Sources */,
 				ED3DA1CF2CC154DF0099D719 /* LoadingView.swift in Sources */,
 				ED7CCAFA2CF783600035DFE0 /* SignUpView.swift in Sources */,
 				ED80F5A22CF7965F00B8C0C8 /* ContentView.swift in Sources */,
