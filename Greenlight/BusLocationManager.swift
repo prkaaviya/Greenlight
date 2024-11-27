@@ -62,6 +62,8 @@ class BusLocationManager: ObservableObject {
                 switch result {
                 case .success(let locations):
                     let uniqueLocations = Array(Set(locations))
+                    print("Locations : \(locations.count) count")
+                    print("Unique locations : \(uniqueLocations.count) count")
                     let sortedLocations = uniqueLocations.sorted {
                         $0.directionId ?? 0 < $1.directionId ?? 0 ||
                         $0.location.distance(from: userLocation) < $1.location.distance(from: userLocation)
@@ -69,6 +71,8 @@ class BusLocationManager: ObservableObject {
                     
                     self.direction0Locations = sortedLocations.filter { $0.directionId == 0 }
                     self.direction1Locations = sortedLocations.filter { $0.directionId == 1 }
+                    print("Direction 0: \(self.direction0Locations.count) buses")
+                    print("Direction 1: \(self.direction1Locations.count) buses")
                     self.busLocations = sortedLocations
                     
                     // Upload bus data to Firebase

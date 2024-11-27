@@ -70,7 +70,7 @@ struct GPSView: View {
                     
                     Spacer()
                     
-                    NavigationLink(destination: AddFavoriteRouteView(favoriteRoute: $favoriteRoute, favoriteRouteName: $favoriteRouteName, showAlert: $showAlert)) {
+                    NavigationLink(destination: AddFavoriteRouteView(favoriteRoute: $favoriteRoute, favoriteRouteName: $favoriteRouteName, showAlert: $showAlert, isBusListViewActive: $isBusListViewActive)) {
                         Text("Add Favorite Route")
                             .font(.headline)
                             .foregroundColor(Color("PrimaryAccentColor"))
@@ -85,7 +85,7 @@ struct GPSView: View {
                     
                     // NavigationLink to BusListView with condition based on `isBusListViewActive`
                     NavigationLink(
-                        destination: BusListView(busLocationManager: busLocationManager, userLocation: userLocation, favoriteRouteName: favoriteRouteName),
+                        destination: BusListView(busLocationManager: busLocationManager, userLocation: userLocation, favoriteRoute: favoriteRoute, favoriteRouteName: favoriteRouteName),
                         isActive: $isBusListViewActive
                     ) {
                         EmptyView()
@@ -99,13 +99,18 @@ struct GPSView: View {
                     busLocationManager.stopUpdatingBusLocations()
                 }
             }
+            .onChange(of: isBusListViewActive) { newValue in
+                print("DEBUG: isBusListViewActive changed to \(newValue)")
+            }
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Favorite Route Added"),
                     message: Text("Your favorite route \(favoriteRouteName) has been saved."),
                     dismissButton: .default(Text("OK")) {
-                        // Trigger BusListView navigation after dismissing the alert
-                        isBusListViewActive = true
+                        DispatchQueue.main.async {
+                            isBusListViewActive = true
+                            print("DEBUG: Setting BusListView now")
+                        }
                     }
                 )
             }

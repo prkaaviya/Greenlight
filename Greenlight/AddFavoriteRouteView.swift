@@ -13,6 +13,7 @@ struct AddFavoriteRouteView: View {
     @Binding var favoriteRoute: String
     @Binding var favoriteRouteName: String
     @Binding var showAlert: Bool  // Binding to show alert in GPSView
+    @Binding var isBusListViewActive: Bool
     
     // Example list of routes - implementing only 46A for now.
     let routeNamesList = ["46A", "38A", "C1", "C2", "145", "155"]
@@ -66,6 +67,7 @@ struct AddFavoriteRouteView: View {
                         favoriteRouteName = routeName
                         isLoading = false
                         showAlert = true  // Trigger alert
+                        isBusListViewActive = true
                     }
                 }) {
                     Text("Route \(routeName)")
@@ -109,5 +111,6 @@ extension Text {
 }
 
 #Preview {
-    AddFavoriteRouteView(favoriteRoute: .constant(""), favoriteRouteName: .constant(""), showAlert: .constant(false))
+    AddFavoriteRouteView(favoriteRoute: .constant(""), favoriteRouteName: .constant(""), showAlert: .constant(false), isBusListViewActive: .constant(false)
+)
 }

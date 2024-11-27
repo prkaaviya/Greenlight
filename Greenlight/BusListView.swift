@@ -11,11 +11,13 @@ import CoreLocation
 struct BusListView: View {
     @ObservedObject var busLocationManager: BusLocationManager
     let userLocation: CLLocation  // Accepts user location
+    let favoriteRoute: String
     let favoriteRouteName: String // Favorite route name for display
+
     
     var body: some View {
         VStack {
-            Text("Bus Locations for \(favoriteRouteName)")
+            Text("Bus timings for \(favoriteRouteName)")
                 .font(.title)
                 .padding()
             
@@ -38,10 +40,26 @@ struct BusListView: View {
             }
             
             if busLocationManager.direction0Locations.isEmpty && busLocationManager.direction1Locations.isEmpty {
-                Text("No bus locations available for the selected route.")
+                Text("No bus locations available for the selected route. Please refresh.")
                     .foregroundColor(.gray)
                     .padding()
+                Button(action: {
+                                print("DEBUG: Manual refresh triggered")
+                                busLocationManager.startUpdatingBusLocations(for: favoriteRoute, userLocation: userLocation)
+                            }) {
+                                Text("Refresh")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.blue)
+                                    .cornerRadius(8)
+                            }
+                            .padding(.bottom, 10)
+                            
             }
+        }
+        .onAppear {
+            busLocationManager.startUpdatingBusLocations(for: favoriteRoute, userLocation: userLocation)
         }
         .padding()
     }

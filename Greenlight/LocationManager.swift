@@ -12,8 +12,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
     var ref: DatabaseReference!
     
-    @Published var userLatitude: Double = 0.0
-    @Published var userLongitude: Double = 0.0
+    // Default coordinates for Dublin - 53.3498° N, 6.2603° W
+    @Published var userLatitude: Double = 53.3498
+    @Published var userLongitude: Double = 6.2603
     @Published var locationName: String = "Fetching location..."
 
     override init() {

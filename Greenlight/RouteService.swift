@@ -41,11 +41,16 @@ class RouteService {
                     let longitude = Double(fields[5].trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0.0
                     
                     stopData[stopId] = (name: stopName, latitude: latitude, longitude: longitude)
+                } else {
+                    print("DEBUG: Invalid line format in stops.txt: \(line)")
                 }
             }
-            print("DEBUG - Loaded \(stopData.count) stops with coordinates.")
+            print("DEBUG: Loaded \(stopData.count) stops with coordinates.")
         } catch {
             print("Error reading stops.txt file: \(error)")
+        }
+        if stopData.isEmpty {
+            print("DEBUG: Warning - stopData is empty. Ensure stops.txt is correctly formatted and loaded.")
         }
     }
 
@@ -77,61 +82,87 @@ class RouteService {
                 if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                    let entities = jsonObject["entity"] as? [[String: Any]] {
                     
+                    print("DEBUG: Found \(entities.count) entities")
                     var index = 0
-                    
+
                     let busLocations: [BusLocation] = entities.compactMap { (entity: [String: Any]) -> BusLocation? in
-                        guard let tripUpdate = entity["trip_update"] as? [String: Any],
-                              let trip = tripUpdate["trip"] as? [String: Any],
-                              let entityRouteId = trip["route_id"] as? String, entityRouteId == routeId,
-                              let stopTimeUpdates = tripUpdate["stop_time_update"] as? [[String: Any]] else {
+                        guard let tripUpdate = entity["trip_update"] as? [String: Any] else {
+                            print("DEBUG: Skipping entity due to missing `trip_update`")
                             return nil
                         }
-                        
-                        // Extract additional information
+
+                        guard let trip = tripUpdate["trip"] as? [String: Any] else {
+                            print("DEBUG: Skipping entity due to missing `trip` in `trip_update`")
+                            return nil
+                        }
+
+                        guard let entityRouteId = trip["route_id"] as? String else {
+                            print("DEBUG: Skipping entity due to missing `route_id` in `trip`")
+                            return nil
+                        }
+
+                        if entityRouteId != routeId {
+                            print("DEBUG: Skipping entity due to mismatched `route_id`: \(entityRouteId), expected: \(routeId)")
+                            return nil
+                        }
+
+                        guard let stopTimeUpdates = tripUpdate["stop_time_update"] as? [[String: Any]], !stopTimeUpdates.isEmpty else {
+                            print("DEBUG: Skipping entity due to missing or empty `stop_time_update`")
+                            return nil
+                        }
+
                         let directionId = trip["direction_id"] as? Int
                         let vehicle = tripUpdate["vehicle"] as? [String: Any]
                         let vehicleId = vehicle?["id"] as? String
                         let timestamp = tripUpdate["timestamp"] as? TimeInterval
 
                         for stopTimeUpdate in stopTimeUpdates {
-                            if let stopId = stopTimeUpdate["stop_id"] as? String,
-                               let stopInfo = self.stopData[stopId] {  // Retrieve stop info with coordinates
-                                
-                                let stopName = stopInfo.name
-                                let latitude = stopInfo.latitude
-                                let longitude = stopInfo.longitude
-                                
-                                let arrivalDelay = (stopTimeUpdate["arrival"] as? [String: Any])?["delay"] as? Int
-                                let departureDelay = (stopTimeUpdate["departure"] as? [String: Any])?["delay"] as? Int
-                                
-                                let arrivalMinutes = (arrivalDelay ?? 0) / 60
-                                let departureMinutes = (departureDelay ?? 0) / 60
-                                let direction = directionId ?? -1
-                                let vehicle = vehicleId ?? "Unknown"
-                                let time = timestamp ?? 0
-                                
-                                print("DEBUG - Found stop: \(stopName) (ID: \(stopId)) for route: \(routeId) at index \(index), Arrival Delay: \(arrivalMinutes) minutes, Departure Delay: \(departureMinutes) minutes, Direction: \(direction), Vehicle: \(vehicle), Timestamp: \(time)")
-                                
-                                let busLocation = BusLocation(
-                                    id: String(index),
-                                    stopId: stopId,
-                                    stopName: stopName,
-                                    arrivalDelay: arrivalDelay,
-                                    departureDelay: departureDelay,
-                                    directionId: directionId,
-                                    vehicleId: vehicleId,
-                                    timestamp: timestamp,
-                                    latitude: latitude,
-                                    longitude: longitude
-                                )
-                                
-                                index += 1
-                                return busLocation
+                            guard let stopId = stopTimeUpdate["stop_id"] as? String else {
+                                print("DEBUG: Skipping `stop_time_update` due to missing `stop_id`")
+                                continue
                             }
+
+                            guard let stopInfo = self.stopData[stopId] else {
+                                print("DEBUG: `stop_id` \(stopId) not found in `stopData`")
+                                continue
+                            }
+
+                            let stopName = stopInfo.name
+                            let latitude = stopInfo.latitude
+                            let longitude = stopInfo.longitude
+
+                            let arrivalDelay = (stopTimeUpdate["arrival"] as? [String: Any])?["delay"] as? Int
+                            let departureDelay = (stopTimeUpdate["departure"] as? [String: Any])?["delay"] as? Int
+
+                            let arrivalMinutes = (arrivalDelay ?? 0) / 60
+                            let departureMinutes = (departureDelay ?? 0) / 60
+                            let direction = directionId ?? -1
+                            let vehicle = vehicleId ?? "Unknown"
+                            let time = timestamp ?? 0
+
+                            print("DEBUG - Found stop: \(stopName) (ID: \(stopId)) for route: \(routeId) at index \(index), Arrival Delay: \(arrivalMinutes) minutes, Departure Delay: \(departureMinutes) minutes, Direction: \(direction), Vehicle: \(vehicle), Timestamp: \(time)")
+
+                            let busLocation = BusLocation(
+                                id: String(index),
+                                stopId: stopId,
+                                stopName: stopName,
+                                arrivalDelay: arrivalDelay,
+                                departureDelay: departureDelay,
+                                directionId: directionId,
+                                vehicleId: vehicleId,
+                                timestamp: timestamp,
+                                latitude: latitude,
+                                longitude: longitude
+                            )
+
+                            index += 1
+                            return busLocation
                         }
-                        return nil  // Return nil if no stop_id is found in stop_time_update
+
+                        return nil
                     }
-                    
+
+                    print("DEBUG: Parsed \(busLocations.count) bus locations")
                     completion(.success(busLocations))
                 } else {
                     completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid data format"])))
@@ -143,8 +174,6 @@ class RouteService {
 
         task.resume()
     }
-
-
 
     // Function to get route ID by short name
     func getRouteId(for routeName: String) -> String? {
