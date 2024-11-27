@@ -55,7 +55,7 @@ struct MapboxUIView: UIViewRepresentable {
 
         // Add user location annotation
         var userLocationAnnotation = PointAnnotation(coordinate: coordinate)
-        userLocationAnnotation.textField = "You are here."
+        userLocationAnnotation.textField = "You are here!"
         userLocationAnnotation.textOffset = [0, 2]
         userLocationAnnotation.textColor = StyleColor(.black)
         userLocationAnnotation.iconImage = "PrimaryAccentColor"
@@ -66,7 +66,7 @@ struct MapboxUIView: UIViewRepresentable {
             var annotation = PointAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
             annotation.textField = "\(location.stopName) (\(location.directionId ?? -1))"
             
-            let directionColor: UIColor = location.directionId == 0 ? .red : .green
+            let directionColor: UIColor = location.directionId == 0 ? .red : .purple
             annotation.textColor = StyleColor(directionColor)
             annotation.textOffset = [0, 2]
             annotation.iconImage = "BusIcon"

@@ -15,7 +15,6 @@ struct GPSView: View {
     @State private var isShowingAddRouteView = false
     @State private var favoriteRoute: String = ""
     @State private var favoriteRouteName: String = ""
-    @State private var showAlert = false
     @State private var isBusListViewActive = false  // New state to control navigation
     @State private var busLocations: [BusLocation] = []
     
@@ -70,8 +69,8 @@ struct GPSView: View {
                     
                     Spacer()
                     
-                    NavigationLink(destination: AddFavoriteRouteView(favoriteRoute: $favoriteRoute, favoriteRouteName: $favoriteRouteName, showAlert: $showAlert, isBusListViewActive: $isBusListViewActive)) {
-                        Text("Add Favorite Route")
+                    NavigationLink(destination: AddFavoriteRouteView(favoriteRoute: $favoriteRoute, favoriteRouteName: $favoriteRouteName, isBusListViewActive: $isBusListViewActive)) {
+                        Text("Select From Bus Routes")
                             .font(.headline)
                             .foregroundColor(Color("PrimaryAccentColor"))
                             .padding(.vertical, 12)
@@ -101,18 +100,6 @@ struct GPSView: View {
             }
             .onChange(of: isBusListViewActive) { newValue in
                 print("DEBUG: isBusListViewActive changed to \(newValue)")
-            }
-            .alert(isPresented: $showAlert) {
-                Alert(
-                    title: Text("Favorite Route Added"),
-                    message: Text("Your favorite route \(favoriteRouteName) has been saved."),
-                    dismissButton: .default(Text("OK")) {
-                        DispatchQueue.main.async {
-                            isBusListViewActive = true
-                            print("DEBUG: Setting BusListView now")
-                        }
-                    }
-                )
             }
             .cornerRadius(10)
         }

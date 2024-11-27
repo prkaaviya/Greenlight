@@ -12,19 +12,17 @@ struct AddFavoriteRouteView: View {
     @State private var isLoading = false
     @Binding var favoriteRoute: String
     @Binding var favoriteRouteName: String
-    @Binding var showAlert: Bool  // Binding to show alert in GPSView
     @Binding var isBusListViewActive: Bool
     
-    // Example list of routes - implementing only 39A for now.
     let routeNamesList = ["46A", "39A", "C1", "C2", "145", "155"]
 
     var body: some View {
         VStack {
-            Text("Select Favorite Route.")
+            Text("Choose a bus route.")
                 .font(.title2)
                 .foregroundColor(Color("PrimaryAccentColor"))
                 .fontWeight(.bold)
-                .padding(.top, 60)
+                .padding(.top, 30)
             
             Spacer()
             
@@ -41,59 +39,31 @@ struct AddFavoriteRouteView: View {
         .padding(.bottom, 20)
         .background(Color("TextColor"))
         .edgesIgnoringSafeArea(.all)
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text("Success"),
-                message: Text("\(favoriteRouteName) saved as Favorite."),
-                dismissButton: .default(Text("OK")) {
-                    // Dismiss view after alert is acknowledged
-                    presentationMode.wrappedValue.dismiss()
-                }
-            )
-        }
     }
     
     private func routeButton(for routeName: String) -> some View {
         Group {
-            if routeName == "39A" {
-                Button(action: {
-                    print("\(routeName) selected")
-                    isLoading = true
+            Button(action: {
+                print("\(routeName) selected")
+                isLoading = true
 
-                    // Save the selected route to UserDefaults
-                    if let routeId = RouteService.shared.getRouteId(for: routeName) {
-                        RoutePreference.saveFavoriteRoute(routeId: routeId, routeName: routeName)
-                        favoriteRoute = routeId
-                        favoriteRouteName = routeName
-                        isLoading = false
-                        showAlert = true  // Trigger alert
-                        isBusListViewActive = true
-                    }
-                }) {
-                    Text("Route \(routeName)")
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color("PrimaryAccentColor"))
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
+                // Save the selected route to UserDefaults
+                if let routeId = RouteService.shared.getRouteId(for: routeName) {
+                    RoutePreference.saveFavoriteRoute(routeId: routeId, routeName: routeName)
+                    favoriteRoute = routeId
+                    favoriteRouteName = routeName
+                    isLoading = false
+                    isBusListViewActive = true
                 }
-            } else {
-                HStack {
-                    Text("Route \(routeName)")
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                    Spacer()
-                    Text("WIP")
-                        .font(.subheadline)
-                        .foregroundColor(.red)
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color("PrimaryAccentColor").opacity(0.2))
-                .cornerRadius(10)
-                .padding(.horizontal)
+            }) {
+                Text("Route \(routeName)")
+                    .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color("PrimaryAccentColor"))
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
             }
         }
     }
@@ -111,6 +81,6 @@ extension Text {
 }
 
 #Preview {
-    AddFavoriteRouteView(favoriteRoute: .constant(""), favoriteRouteName: .constant(""), showAlert: .constant(false), isBusListViewActive: .constant(false)
+    AddFavoriteRouteView(favoriteRoute: .constant(""), favoriteRouteName: .constant(""), isBusListViewActive: .constant(false)
 )
 }
