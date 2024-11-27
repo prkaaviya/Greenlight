@@ -14,6 +14,7 @@ struct BusLocation: Equatable, Hashable {
     let timestamp: TimeInterval?
     let latitude: Double
     let longitude: Double
+    let destinationStopName: String
 
     var location: CLLocation {
         return CLLocation(latitude: latitude, longitude: longitude)

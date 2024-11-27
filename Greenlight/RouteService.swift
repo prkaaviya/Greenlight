@@ -15,9 +15,72 @@ class RouteService {
     private let apiKey = "f0fcf8c0531c4937a68a02023e01a3d3"
     
     private var stopData: [String: (name: String, latitude: Double, longitude: Double)] = [:]  // Store stop data with coordinates
+    private var tripsData: [String: (routeId: String, directionId: Int)] = [:]  // Maps trip_id to route_id and direction_id
+    private var stopTimesData: [String: [(stopId: String, stopSequence: Int)]] = [:]  // Maps trip_id to list of stops
 
     private init() {
-        loadStopData()  // Load stop data on initialization
+        loadStopData()
+        loadTripsData()
+        loadStopTimesData()
+    }
+
+    
+    private func loadTripsData() {
+        guard let filePath = Bundle.main.path(forResource: "trips", ofType: "txt") else {
+            print("trips.txt file not found.")
+            return
+        }
+        
+        do {
+            let content = try String(contentsOfFile: filePath)
+            let lines = content.components(separatedBy: .newlines)
+            
+            for line in lines.dropFirst() {  // Skip the header line
+                let fields = line.split(separator: ",", omittingEmptySubsequences: false)
+                
+                if fields.count >= 3 {
+                    let tripId = fields[2].trimmingCharacters(in: .whitespacesAndNewlines)
+                    let routeId = fields[0].trimmingCharacters(in: .whitespacesAndNewlines)
+                    let directionId = Int(fields[5].trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0
+                    
+                    tripsData[tripId] = (routeId: routeId, directionId: directionId)
+                }
+            }
+            print("DEBUG - Loaded \(tripsData.count) trips.")
+        } catch {
+            print("Error reading trips.txt file: \(error)")
+        }
+    }
+
+    private func loadStopTimesData() {
+        guard let filePath = Bundle.main.path(forResource: "stop_times", ofType: "txt") else {
+            print("stop_times.txt file not found.")
+            return
+        }
+        
+        do {
+            let content = try String(contentsOfFile: filePath)
+            let lines = content.components(separatedBy: .newlines)
+            
+            for line in lines.dropFirst() {  // Skip the header line
+                let fields = line.split(separator: ",", omittingEmptySubsequences: false)
+                
+                if fields.count >= 4 {
+                    let tripId = fields[0].trimmingCharacters(in: .whitespacesAndNewlines)
+                    let stopId = fields[3].trimmingCharacters(in: .whitespacesAndNewlines)
+                    let stopSequence = Int(fields[4].trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0
+                    
+                    if stopTimesData[tripId] != nil {
+                        stopTimesData[tripId]?.append((stopId: stopId, stopSequence: stopSequence))
+                    } else {
+                        stopTimesData[tripId] = [(stopId: stopId, stopSequence: stopSequence)]
+                    }
+                }
+            }
+            print("DEBUG - Loaded \(stopTimesData.count) stop times.")
+        } catch {
+            print("Error reading stop_times.txt file: \(error)")
+        }
     }
     
     // Load stops.txt to get stop data including latitude and longitude
@@ -52,6 +115,22 @@ class RouteService {
         if stopData.isEmpty {
             print("DEBUG: Warning - stopData is empty. Ensure stops.txt is correctly formatted and loaded.")
         }
+    }
+    
+    func getLastStopName(for routeId: String, directionId: Int) -> String {
+        // Find trips for the given routeId and directionId
+        let tripsForRoute = tripsData.filter { $0.value.routeId == routeId && $0.value.directionId == directionId }
+        
+        // Find the trip with the highest stop sequence
+        for (tripId, _) in tripsForRoute {
+            if let stops = stopTimesData[tripId] {
+                let lastStop = stops.max(by: { $0.stopSequence < $1.stopSequence })
+                if let stopId = lastStop?.stopId, let stopInfo = stopData[stopId] {
+                    return stopInfo.name
+                }
+            }
+        }
+        return "Unknown Destination"
     }
 
     func fetchBusLocations(for routeId: String, completion: @escaping (Result<[BusLocation], Error>) -> Void) {
@@ -139,6 +218,8 @@ class RouteService {
                             let direction = directionId ?? -1
                             let vehicle = vehicleId ?? "Unknown"
                             let time = timestamp ?? 0
+                            
+                            let destinationStopName = self.getLastStopName(for: entityRouteId, directionId: directionId ?? -1)
 
                             print("DEBUG - Found stop: \(stopName) (ID: \(stopId)) for route: \(routeId) at index \(index), Arrival Delay: \(arrivalMinutes) minutes, Departure Delay: \(departureMinutes) minutes, Direction: \(direction), Vehicle: \(vehicle), Timestamp: \(time)")
 
@@ -152,7 +233,8 @@ class RouteService {
                                 vehicleId: vehicleId,
                                 timestamp: timestamp,
                                 latitude: latitude,
-                                longitude: longitude
+                                longitude: longitude,
+                                destinationStopName: destinationStopName
                             )
 
                             index += 1

@@ -22,16 +22,16 @@ struct BusListView: View {
                 .padding()
             
             if !busLocationManager.direction0Locations.isEmpty {
-                Section(header: Text("Direction 0")) {
+                Section(header: Text("Towards \(busLocationManager.direction0Locations.first?.destinationStopName ?? "Unknown")")) {
                     List(busLocationManager.direction0Locations, id: \.id) { location in
                         BusLocationRow(location: location, userLocation: userLocation)
                     }
                 }
                 .listStyle(InsetGroupedListStyle())
             }
-            
+
             if !busLocationManager.direction1Locations.isEmpty {
-                Section(header: Text("Direction 1")) {
+                Section(header: Text("Towards \(busLocationManager.direction1Locations.first?.destinationStopName ?? "Unknown")")) {
                     List(busLocationManager.direction1Locations, id: \.id) { location in
                         BusLocationRow(location: location, userLocation: userLocation)
                     }
