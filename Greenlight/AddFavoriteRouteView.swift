@@ -15,8 +15,8 @@ struct AddFavoriteRouteView: View {
     @Binding var showAlert: Bool  // Binding to show alert in GPSView
     @Binding var isBusListViewActive: Bool
     
-    // Example list of routes - implementing only 46A for now.
-    let routeNamesList = ["46A", "38A", "C1", "C2", "145", "155"]
+    // Example list of routes - implementing only 39A for now.
+    let routeNamesList = ["46A", "39A", "C1", "C2", "145", "155"]
 
     var body: some View {
         VStack {
@@ -55,7 +55,7 @@ struct AddFavoriteRouteView: View {
     
     private func routeButton(for routeName: String) -> some View {
         Group {
-            if routeName == "46A" {
+            if routeName == "39A" {
                 Button(action: {
                     print("\(routeName) selected")
                     isLoading = true

@@ -73,14 +73,8 @@ struct BusLocationRow: View {
         VStack(alignment: .leading) {
             Text(location.stopName)
                 .font(.headline)
-            Text("Stop ID: \(location.stopId)")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
             Text("Arrival Delay: \(location.arrivalDelay != nil ? "\(location.arrivalDelay! / 60) min" : "N/A")")
             Text("Departure Delay: \(location.departureDelay != nil ? "\(location.departureDelay! / 60) min" : "N/A")")
-            Text("Vehicle ID: \(location.vehicleId ?? "Unknown")")
-            Text("Direction: \(location.directionId ?? -1)")
-            Text("Coordinates: (\(location.latitude), \(location.longitude))")
             Text("Distance from user: \(location.distance(from: userLocation) / 1000, specifier: "%.2f") km")
                 .foregroundColor(.gray)
         }
