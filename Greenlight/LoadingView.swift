@@ -41,6 +41,7 @@ struct LoadingView: View {
             }
         }
         .padding()
+        .background(Color("TextColor").edgesIgnoringSafeArea(.all))
     }
 }
 

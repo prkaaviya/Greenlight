@@ -61,9 +61,15 @@ struct LoginView: View {
     }
 
     func loginUser() {
+        print("DEBUG: isAuthenticated: \(authManager.isAuthenticated)")
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 errorMessage = error.localizedDescription
+            } else {
+                DispatchQueue.main.async {
+                    authManager.isAuthenticated = true
+                    print("DEBUG: Login successful. isAuthenticated:  \(authManager.isAuthenticated)")
+                }
             }
         }
     }

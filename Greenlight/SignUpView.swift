@@ -70,7 +70,7 @@ struct SignUpView: View {
             return
         }
 
-        authManager.signUp(email: email, password: password) { error in
+        authManager.signUp(email: email, password: password, name: name) { error in
             if let error = error {
                 self.errorMessage = error
             }

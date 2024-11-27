@@ -28,11 +28,18 @@ struct MainView: View {
                     .foregroundColor(Color("PrimaryAccentColor"))
                     .cornerRadius(10)
                     
+                    if let name = authManager.userName {
+                        Text("Hello \(name)!")
+                            .font(.custom("MonofontoRegular", size: 18))
+                            .foregroundColor(Color("TextColor"))
+                            .padding(.bottom, 50)
+                    }
+                    
                     Spacer()
                     
                     NavigationLink(destination: RealTimeMapView()) {
                         Text("Show Real-Time Map")
-                            .font(.headline)
+                            .font(.custom("MonofontoRegular", size: 16))
                             .foregroundColor(Color("PrimaryAccentColor"))
                             .padding(.vertical, 12)
                             .frame(maxWidth: .infinity)
@@ -40,12 +47,12 @@ struct MainView: View {
                             .cornerRadius(10)
                             .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)
                     }
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, 25)
                     .padding(.bottom, 50)
                     
                     NavigationLink(destination: ChooseRouteView()) {
                         Text("Choose Bus Route")
-                            .font(.headline)
+                            .font(.custom("MonofontoRegular", size: 16))
                             .foregroundColor(Color("PrimaryAccentColor"))
                             .padding(.vertical, 12)
                             .frame(maxWidth: .infinity)
@@ -58,7 +65,7 @@ struct MainView: View {
                     
                     Button(action: logout) {
                         Text("Logout")
-                            .font(.headline)
+                            .font(.custom("MonofontoRegular", size: 16))
                             .foregroundColor(Color("PrimaryAccentColor"))
                             .padding(.vertical, 12)
                             .frame(maxWidth: .infinity)
