@@ -5,6 +5,7 @@ target 'Greenlight' do
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'SQLite.swift', '~> 0.13.0'
 end
 
 post_install do |installer|

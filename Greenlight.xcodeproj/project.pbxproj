@@ -22,6 +22,9 @@
 		ED7CCAFC2CF783A30035DFE0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CCAFB2CF7839F0035DFE0 /* LoginView.swift */; };
 		ED80F5A02CF795F100B8C0C8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80F59F2CF795ED00B8C0C8 /* AuthManager.swift */; };
 		ED80F5A22CF7965F00B8C0C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80F5A12CF7965B00B8C0C8 /* ContentView.swift */; };
+		ED80F5A62CF7ADD000B8C0C8 /* static_data.db in Resources */ = {isa = PBXBuildFile; fileRef = ED80F5A52CF7ADD000B8C0C8 /* static_data.db */; };
+		ED80F5A82CF7ADDA00B8C0C8 /* create_db_greenlight.py in Resources */ = {isa = PBXBuildFile; fileRef = ED80F5A72CF7ADDA00B8C0C8 /* create_db_greenlight.py */; };
+		ED80F5AA2CF7B07800B8C0C8 /* SQLDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80F5A92CF7B07200B8C0C8 /* SQLDatabaseManager.swift */; };
 		EDFECDF22CDCF098001A6CEC /* calendar_dates.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDEA2CDCF098001A6CEC /* calendar_dates.txt */; };
 		EDFECDF32CDCF098001A6CEC /* routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDEC2CDCF098001A6CEC /* routes.txt */; };
 		EDFECDF42CDCF098001A6CEC /* agency.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDFECDE82CDCF098001A6CEC /* agency.txt */; };
@@ -86,6 +89,9 @@
 		ED7CCAFB2CF7839F0035DFE0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		ED80F59F2CF795ED00B8C0C8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		ED80F5A12CF7965B00B8C0C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ED80F5A52CF7ADD000B8C0C8 /* static_data.db */ = {isa = PBXFileReference; lastKnownFileType = text; path = static_data.db; sourceTree = "<group>"; };
+		ED80F5A72CF7ADDA00B8C0C8 /* create_db_greenlight.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = create_db_greenlight.py; sourceTree = "<group>"; };
+		ED80F5A92CF7B07200B8C0C8 /* SQLDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLDatabaseManager.swift; sourceTree = "<group>"; };
 		EDFECDE82CDCF098001A6CEC /* agency.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = agency.txt; sourceTree = "<group>"; };
 		EDFECDE92CDCF098001A6CEC /* calendar.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = calendar.txt; sourceTree = "<group>"; };
 		EDFECDEA2CDCF098001A6CEC /* calendar_dates.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = calendar_dates.txt; sourceTree = "<group>"; };
@@ -178,7 +184,10 @@
 				ED7CCAF52CF781150035DFE0 /* ChooseRouteView.swift */,
 				ED7CCAF72CF7814D0035DFE0 /* RealTimeMapView.swift */,
 				ED80F59F2CF795ED00B8C0C8 /* AuthManager.swift */,
+				ED80F5A92CF7B07200B8C0C8 /* SQLDatabaseManager.swift */,
 				ED3DA1BE2CC154DF0099D719 /* Greenlight.entitlements */,
+				ED80F5A72CF7ADDA00B8C0C8 /* create_db_greenlight.py */,
+				ED80F5A52CF7ADD000B8C0C8 /* static_data.db */,
 				ED3DA1C32CC154DF0099D719 /* MonofontoRegular.otf */,
 				ED3DA1C62CC154DF0099D719 /* Soulmeh.otf */,
 			);
@@ -338,6 +347,7 @@
 				ED3DA1C72CC154DF0099D719 /* Soulmeh.otf in Resources */,
 				ED3DA1C82CC154DF0099D719 /* GoogleService-Info.plist in Resources */,
 				ED3DA1C92CC154DF0099D719 /* MonofontoRegular.otf in Resources */,
+				ED80F5A62CF7ADD000B8C0C8 /* static_data.db in Resources */,
 				EDFECDF22CDCF098001A6CEC /* calendar_dates.txt in Resources */,
 				EDFECDF32CDCF098001A6CEC /* routes.txt in Resources */,
 				EDFECDF42CDCF098001A6CEC /* agency.txt in Resources */,
@@ -346,6 +356,7 @@
 				EDFECDF72CDCF098001A6CEC /* calendar.txt in Resources */,
 				EDFECDF82CDCF098001A6CEC /* trips.txt in Resources */,
 				EDFECDF92CDCF098001A6CEC /* feed_info.txt in Resources */,
+				ED80F5A82CF7ADDA00B8C0C8 /* create_db_greenlight.py in Resources */,
 				EDFECDFA2CDCF098001A6CEC /* stop_times.txt in Resources */,
 				ED3DA1CA2CC154DF0099D719 /* Assets.xcassets in Resources */,
 			);
@@ -423,6 +434,7 @@
 				ED7CCAF42CF77F760035DFE0 /* MainView.swift in Sources */,
 				ED3DA1D12CC154DF0099D719 /* GreenlightApp.swift in Sources */,
 				ED7CCAFC2CF783A30035DFE0 /* LoginView.swift in Sources */,
+				ED80F5AA2CF7B07800B8C0C8 /* SQLDatabaseManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
