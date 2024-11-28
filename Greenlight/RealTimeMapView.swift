@@ -6,32 +6,35 @@
 //
 
 import SwiftUI
-import MapboxMaps
-import CoreLocation
 
 struct RealTimeMapView: View {
-    let busLocations: [BusLocation]
-    let userLocation: CLLocation
-    
     var body: some View {
         ZStack {
             Color("PrimaryAccentColor").edgesIgnoringSafeArea(.all)
             
-            MapboxUIView(coordinate: userLocation.coordinate, busLocations: .constant(busLocations))
-                .edgesIgnoringSafeArea(.all)
-            
             VStack {
                 Text("Real-Time Map")
-                    .font(.headline)
-                    .foregroundColor(.white)
+                    .font(.largeTitle)
+                    .foregroundColor(Color("TextColor"))
                     .padding()
-                    .background(Color.black.opacity(0.6))
+                
+                Spacer()
+                
+                // Placeholder for the map integration
+                Text("Map will be displayed here.")
+                    .foregroundColor(Color("TextColor"))
+                    .padding()
+                    .frame(maxWidth: .infinity, minHeight: 300)
+                    .background(Color("TextColor").opacity(0.2))
                     .cornerRadius(10)
-                    .padding(.top, 50)
                 
                 Spacer()
             }
+            .padding()
         }
     }
 }
 
+#Preview {
+    RealTimeMapView()
+}

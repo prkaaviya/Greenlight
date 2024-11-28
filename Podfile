@@ -2,9 +2,10 @@ platform :ios, '15.6'
 
 target 'Greenlight' do
   use_frameworks!
-  pod 'MapboxMaps', '~> 10.18.2'
+  pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'SQLite.swift', '~> 0.13.0'
 end
 
 post_install do |installer|

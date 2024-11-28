@@ -13,8 +13,9 @@ struct LoadingView: View {
     var body: some View {
         VStack {
             if isActive {
-                // Navigate to GPS screen after the loading
-                GPSView()
+                NavigationView {
+                    LoginView()
+                }
             } else {
                 VStack {
                     Image("GreenLightLogo")
@@ -25,14 +26,14 @@ struct LoadingView: View {
                     Text("Greenlight")
                         .font(.custom("Soulmeh", size: 40))
                         .foregroundColor(Color("PrimaryAccentColor"))
-
-                    Color("TextColor")
-                        .edgesIgnoringSafeArea(.all)
                 }
+                .padding()
+                .background(Color("TextColor").edgesIgnoringSafeArea(.all))
                 .onAppear {
-                    // Simulate loading for 3 seconds, then transition
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    // Simulate loading for 2 seconds, then transition
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         withAnimation {
+                            print("DEBUG: LOADING VIEW")
                             self.isActive = true
                         }
                     }
@@ -40,5 +41,10 @@ struct LoadingView: View {
             }
         }
         .padding()
+        .background(Color("TextColor").edgesIgnoringSafeArea(.all))
     }
+}
+
+#Preview {
+    LoadingView()
 }

@@ -1,86 +1,65 @@
 //
-//  MapView.swift
+//  LocationManager.swift
 //  Greenlight
 //
-//  Created by Kaaviya Ramkumar on 17/10/24.
+//  Created by Kaaviya Ramkumar on 27/11/24.
 //
 
+import Foundation
 import CoreLocation
-import FirebaseDatabase
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    private var locationManager = CLLocationManager()
-    var ref: DatabaseReference!
+    private let locationManager = CLLocationManager()
     
-    // Default coordinates for Dublin - 53.3498° N, 6.2603° W
-    @Published var userLatitude: Double = 53.3498
-    @Published var userLongitude: Double = 6.2603
-    @Published var locationName: String = "Fetching location..."
+    @Published var userLocation: CLLocationCoordinate2D?
+    @Published var userAddress: String?
+    @Published var locationError: String?
+
+    var currentLocation: CLLocation? {
+        guard let coordinate = userLocation else { return nil }
+        return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    }
 
     override init() {
         super.init()
-        
-        let db = Database.database(url: "https://greenlight-ffaa2-default-rtdb.europe-west1.firebasedatabase.app/")
-        ref = db.reference()
-        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 100 // Update every 100 meters
         locationManager.requestWhenInUseAuthorization()
-        
         locationManager.startUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
+        guard let location = locations.last else { return }
+        DispatchQueue.main.async {
+            self.userLocation = location.coordinate
+        }
+
+        fetchAddress(from: location) { [weak self] address in
             DispatchQueue.main.async {
-                self.userLatitude = location.coordinate.latitude
-                self.userLongitude = location.coordinate.longitude
-                
-                // Optionally reverse geocode
-                self.reverseGeocode(location: location)
+                self?.userAddress = address
             }
         }
     }
 
-    // Reverse geocoding for location name
-    private func reverseGeocode(location: CLLocation) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        DispatchQueue.main.async {
+            self.locationError = error.localizedDescription
+        }
+    }
+
+    func fetchAddress(from location: CLLocation, completion: @escaping (String?) -> Void) {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
             if let placemark = placemarks?.first {
-                DispatchQueue.main.async {
-                    self.locationName = placemark.locality ?? "Unknown"
-                    print("In reverseGeocode \(self.locationName)")
-                    
-                    // Upload to Firebase only after we have the proper location name
-                    self.uploadGPSDataToFirebase(latitude: self.userLatitude, longitude: self.userLongitude, locationName: self.locationName)
-                }
+                let address = [
+                    placemark.subThoroughfare,
+                    placemark.thoroughfare,
+                    placemark.locality
+                ].compactMap { $0 }.joined(separator: ", ")
+                completion(address)
             } else {
-                print("Error in reverse geocoding: \(error?.localizedDescription ?? "Unknown error")")
+                completion(nil)
             }
         }
-    }
-    
-    // Upload GPS data to Firebase
-    func uploadGPSDataToFirebase(latitude: Double, longitude: Double, locationName: String) {
-        print("In uploadGPSDataToFirebase \(locationName)")
-        let gpsData: [String: Any] = [
-            "latitude": latitude,
-            "longitude": longitude,
-            "locationName": locationName,
-            "timestamp": Date().timeIntervalSince1970
-        ]
-        ref.child("gpsData").childByAutoId().setValue(gpsData) { error, _ in
-            if let error = error {
-                print("Failed to upload GPS data: \(error.localizedDescription)")
-            } else {
-                print("GPS data uploaded successfully!")
-            }
-        }
-    }
-
-    // Called when there's an error with location services
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Failed to find user's location: \(error.localizedDescription)")
     }
 }
